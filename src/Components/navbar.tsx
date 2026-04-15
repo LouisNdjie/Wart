@@ -5,7 +5,7 @@ import {
 
 import {
   Bars3Icon, XMarkIcon, MagnifyingGlassIcon,
-  UserIcon, Cog6ToothIcon, ArrowRightOnRectangleIcon,
+  UserIcon, Cog6ToothIcon, ArrowRightOnRectangleIcon,ArrowLeftOnRectangleIcon
 } from '@heroicons/react/24/outline'
 import { NavLink } from 'react-router-dom'
 import { useEffect, useState, useRef, useCallback } from 'react'
@@ -138,6 +138,14 @@ const Navbar = ({ userInitial = 'SE' }: NavbarProps) => { //On va construire en 
                 <button className={`flex items-center gap-3 w-full px-4 py-2 text-sm text-red-500 ${focus ? 'bg-red-50' : ''}`}>
                   <ArrowRightOnRectangleIcon className="h-4 w-4" />
                   Se déconnecter
+                </button>
+              )}
+            </MenuItem>
+            <MenuItem>
+               {({ focus }) => (
+                <button className={`flex items-center gap-3 w-full px-4 py-2 text-sm text-blue-500 ${focus ? 'bg-blue-50' : ''}`}>
+                  <ArrowLeftOnRectangleIcon className="h-4 w-4" />
+                  Se connecter
                 </button>
               )}
             </MenuItem>
