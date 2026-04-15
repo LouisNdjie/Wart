@@ -68,7 +68,7 @@ const Navbar = ({ userInitial = 'SE' }: NavbarProps) => { //On va construire en 
     <>
       {/* LOGO */}
       <div className="fixed top-6 left-8 z-50">
-        <img src="../src/assets/Wart.png" alt="Logo" className="h-16 w-auto" />
+        <img src="../src/assets/wart.svg" alt="Logo" className="h-16 w-auto" />
       </div>
 
       {/* ACTIONS DROITE */}
