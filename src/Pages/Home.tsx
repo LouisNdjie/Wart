@@ -72,96 +72,76 @@ const archives = [
 
 //titre de section
 const SectionTitle = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="inline-block  text-xl font-medium pb-2 mb-8 border-b-2 border-[#E2725B]">
+  <h2 className="inline-block text-xl text-center font-medium pb-2 ml-4 mb-8 border-b-2 border-[#E2725B]">
     {children}
   </h2>
 )
 
 //carrousel
-const CARD_W = 716 // largeur totale d'une carte (incluant le margin)
+const CARD_W = 750 // largeur  carte et margin 
 const AUTO_DELAY = 3500 // ms entre chaque slide auto
 
 const Carousel = ({ items }: { items: Exposition[] }) => {
-  // Références et états pour le carrousel
   const trackRef = useRef<HTMLDivElement>(null)
   const [pos, setPos] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const navigate = useNavigate()
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  //nombre de cartes visibles
-  const getVisible = () => {
-    if (!trackRef.current?.parentElement) return 1
-    return Math.max(1, Math.floor(trackRef.current.parentElement.offsetWidth / CARD_W))
-  }
+  // Calcul dynamique du nombre de cartes max
+  const getMax = useCallback(() => {
+    if (!trackRef.current?.parentElement) return 0
+    const visible = Math.max(1, Math.floor(trackRef.current.parentElement.offsetWidth / CARD_W))
+    return Math.max(0, items.length - visible)
+  }, [items.length])
 
-  const getMax = () => Math.max(0, items.length - getVisible())
-
-  //Slide vers une position donnée
-  const slideTo = useCallback((next: number) => {
-    if (!trackRef.current) return
-    setPos(next)
-    trackRef.current.style.transform = `translateX(-${next * CARD_W}px)`
-  }, [])
-
-  const slide = (dir: number) => {
+  //on met à jour l'état
+  const slideTo = (next: number) => {
     const max = getMax()
-    const next = Math.max(0, Math.min(pos + dir, max))
-    slideTo(next)
+    setPos(Math.max(0, Math.min(next, max)))
   }
 
-  //défilement auto
-  const startInterval = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current)
+  const slide = (dir: number) => slideTo(pos + dir)
+
+  // Effet pour le défilement automatique
+  useEffect(() => {
+    if (isPaused) return
+
     intervalRef.current = setInterval(() => {
       setPos((current) => {
         const max = getMax()
-        const next = current >= max ? 0 : current + 1
-        if (trackRef.current) {
-          trackRef.current.style.transform = `translateX(-${next * CARD_W}px)`
-        }
-        return next
+        return current >= max ? 0 : current + 1
       })
     }, AUTO_DELAY)
-  }, [])
 
-  useEffect(() => {
-    if (!isPaused) startInterval()
-    else if (intervalRef.current) clearInterval(intervalRef.current)
     return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
-  }, [isPaused, startInterval])
+  }, [isPaused, getMax])
+
+  // Calcul du transform en ligne (plus fiable que la manipulation directe du DOM)
+  const transformStyle = {
+    transform: `translateX(-${pos * CARD_W}px)`,
+  }
 
   return (
     <div
-      className="relative"
+      className="relative w-full overflow-hidden" // Ajout de overflow-hidden ici
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* ── TRACK ── */}
-      <div className="overflow-hidden">
+      <div className="overflow-hidden px-4">
         <div
           ref={trackRef}
-          className="flex gap-4 transition-transform duration-500 ease-in-out justify-center"
+          style={transformStyle}
+          className="flex gap-4 transition-transform duration-500 ease-in-out"
         >
           {items.map((expo) => (
-            <CarouselCard
-              key={expo.id}
-              title={expo.title}
-              description={expo.description}
-              imageUrl={expo.imageUrl}
-              artistName={expo.artistName}
-              artistHandle={expo.artistHandle}
-              artistAvatar={expo.artistAvatar}
-              views={expo.views}
-              comments={expo.comments}
-              likes={expo.likes}
-              onClick={() => navigate(`/expositions/${expo.id}`)}
-            />
+            <div key={expo.id} style={{ minWidth: `${CARD_W}px` }}>
+               <CarouselCard {...expo} onClick={() => navigate(`/expositions/${expo.id}`)} />
+            </div>
           ))}
         </div>
       </div>
 
-      {/*gestionnaire du carrousel*/}
       <button
         onClick={() => slide(-1)}
         disabled={pos === 0}
@@ -176,7 +156,7 @@ const Carousel = ({ items }: { items: Exposition[] }) => {
 
       <button
         onClick={() => slide(1)}
-        disabled={pos >= getMax()}
+        disabled={pos >= items.length - 1}
         aria-label="Suivant"
         className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10
           w-8 h-8 rounded-full bg-white border border-gray-200
@@ -188,7 +168,7 @@ const Carousel = ({ items }: { items: Exposition[] }) => {
 
       {/*indicateurs du carrousel*/}
       <div className="flex justify-center gap-2 mt-6">
-        {Array.from({ length: getMax() + 1 }).map((_, i) => (
+        {Array.from({ length: items.length }).map((_, i) => (
           <button
             key={i}
             onClick={() => slideTo(i)}
@@ -201,10 +181,10 @@ const Carousel = ({ items }: { items: Exposition[] }) => {
           />
         ))}
       </div>
-
     </div>
   )
 }
+
 
 const ChevronLeft = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>

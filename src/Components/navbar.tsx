@@ -204,7 +204,7 @@ const Navbar = ({ userInitial = 'SE' }: NavbarProps) => { //On va construire en 
                 key={item.name}
                 to={item.to}
                 end={item.end}
-                onClick={() => close()} // ← ferme le menu au clic
+                onClick={() => close()} // ferme le menu au clic
                 className={({ isActive }) =>
                   `flex items-center py-2.5 text-base border-b border-gray-50 last:border-0 ${
                     isActive ? 'text-black font-medium' : 'text-gray-500'
