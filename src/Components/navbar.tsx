@@ -5,9 +5,9 @@ import {
 
 import {
   Bars3Icon, XMarkIcon, MagnifyingGlassIcon,
-  UserIcon, Cog6ToothIcon, ArrowRightOnRectangleIcon,ArrowLeftOnRectangleIcon
+  UserIcon, ArrowRightOnRectangleIcon,ArrowLeftOnRectangleIcon
 } from '@heroicons/react/24/outline'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useEffect, useState, useRef, useCallback } from 'react'
 
 
@@ -31,6 +31,7 @@ const Navbar = ({ userInitial = 'SE' }: NavbarProps) => { //On va construire en 
   const [searchOpen, setSearchOpen] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const searchBlurTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -74,7 +75,7 @@ const Navbar = ({ userInitial = 'SE' }: NavbarProps) => { //On va construire en 
       {/* ACTIONS DROITE */}
       <div className="fixed top-6 right-8 z-50 flex items-center space-x-4">
 
-        {/* SEARCH */}
+        {/* SEARCHBAR */}
         <div className="relative">
           {searchOpen ? (
             <div className="flex items-center bg-white/90 backdrop-blur-md border border-gray-200 rounded-xl px-3 py-1 shadow-sm">
@@ -118,24 +119,20 @@ const Navbar = ({ userInitial = 'SE' }: NavbarProps) => { //On va construire en 
           <MenuItems className="absolute right-0 mt-3 w-52 origin-top-right rounded-xl bg-white/90 backdrop-blur-md shadow-lg border border-gray-100 py-1">
             <MenuItem>
               {({ focus }) => (
-                <button className={`flex items-center gap-3 w-full px-4 py-2 text-sm ${focus ? 'bg-gray-100' : ''}`}>
+                <button 
+                  onClick={() => navigate(`/profile`)}
+                  className={`flex items-center gap-3 w-full px-4 py-2 text-sm ${focus ? 'bg-gray-100' : ''}`}>
                   <UserIcon className="h-4 w-4 text-black" />
                   Mon profil
-                </button>
-              )}
-            </MenuItem>
-            <MenuItem>
-              {({ focus }) => (
-                <button className={`flex items-center gap-3 w-full px-4 py-2 text-sm ${focus ? 'bg-gray-100' : ''}`}>
-                  <Cog6ToothIcon className="h-4 w-4 text-black" />
-                  Paramètres
                 </button>
               )}
             </MenuItem>
             <div className="border-t my-1" />
             <MenuItem>
               {({ focus }) => (
-                <button className={`flex items-center gap-3 w-full px-4 py-2 text-sm text-red-500 ${focus ? 'bg-red-50' : ''}`}>
+                <button 
+                  onClick={() => navigate(`/logout`)}
+                  className={`flex items-center gap-3 w-full px-4 py-2 text-sm text-red-500 ${focus ? 'bg-red-50' : ''}`}>
                   <ArrowRightOnRectangleIcon className="h-4 w-4" />
                   Se déconnecter
                 </button>
@@ -143,7 +140,9 @@ const Navbar = ({ userInitial = 'SE' }: NavbarProps) => { //On va construire en 
             </MenuItem>
             <MenuItem>
                {({ focus }) => (
-                <button className={`flex items-center gap-3 w-full px-4 py-2 text-sm text-blue-500 ${focus ? 'bg-blue-50' : ''}`}>
+                <button 
+                  onClick={() => navigate(`/register`)}
+                  className={`flex items-center gap-3 w-full px-4 py-2 text-sm text-blue-500 ${focus ? 'bg-blue-50' : ''}`}>
                   <ArrowLeftOnRectangleIcon className="h-4 w-4" />
                   Se connecter
                 </button>

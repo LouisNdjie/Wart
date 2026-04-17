@@ -1,9 +1,14 @@
+import Button from '../Components/button';
 
 
 import { LockClosedIcon, UserIcon, BookOpenIcon } from "@heroicons/react/24/outline";
 
 
-
+const Title = ({ children }: { children: React.ReactNode }) => (
+  <h1 className="inline-block text-xl text-center font-medium pb-2  mb-8 border-b-2 border-[#E2725B]">
+    {children}
+  </h1>
+)
 
 export const Register = () =>
     {
@@ -16,13 +21,13 @@ export const Register = () =>
             <div className="absolute -inset-0.5 bg-white-60 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             
             <div className="relative card w-96 bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl p-8">
-              <h2 className="text-3xl font-bold text-center text-white mb-8">Register</h2>
+              <Title>Register</Title>
             
               <form className="space-y-6">
                 {/* Champ Utilisateur */}
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-white/80">username</span>
+                    <span className="label-text text-black/80">username</span>
                   </label>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -38,7 +43,7 @@ export const Register = () =>
 
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-white/80">E-Mail</span>
+                    <span className="label-text text-black/80">E-Mail</span>
                   </label>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -55,7 +60,7 @@ export const Register = () =>
                 {/* Champ Mot de passe */}
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-white/80">Password</span>
+                    <span className="label-text text-black/80">Password</span>
                   </label>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -69,11 +74,9 @@ export const Register = () =>
                   </div>
                 </div>
 
-                {/* Bouton Daisy UI customisé */}
+                {/*Bouton perso*/}
                 <div className="form-control mt-6 flex items-center justify-center">
-                  <button className="btn border-none bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm transition-all duration-300" >
-                    S'inscrire
-                  </button>
+                  <Button label="Enregistrer" onClick={() => console.log('Enregistrement')} />
                 </div>
               </form>
 
@@ -101,13 +104,13 @@ export const Connexion = () =>
             <div className="absolute -inset-0.5 bg-white-60 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             
             <div className="relative card w-96 bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl p-8">
-              <h2 className="text-3xl font-bold text-center text-white mb-8">Connexion</h2>
+              <Title>Login</Title>
             
               <form className="space-y-6">
                 {/* Champ Utilisateur */}
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-white/80">Identifiant</span>
+                    <span className="label-text text-black/80">Identifiant</span>
                   </label>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -124,7 +127,7 @@ export const Connexion = () =>
                 {/* Champ Mot de passe */}
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-white/80">Mot de passe</span>
+                    <span className="label-text text-black/80">Mot de passe</span>
                   </label>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -140,9 +143,7 @@ export const Connexion = () =>
 
                 {/* Bouton Daisy UI customisé */}
                 <div className="form-control mt-6 flex items-center justify-center">
-                  <button className="btn border-none bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm transition-all duration-300">
-                    Se connecter
-                  </button>
+                        <Button label="Se connecter" onClick={() => console.log('cliqué')} />
                 </div>
               </form>
 

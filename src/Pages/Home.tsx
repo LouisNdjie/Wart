@@ -117,14 +117,14 @@ const Carousel = ({ items }: { items: Exposition[] }) => {
     return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
   }, [isPaused, getMax])
 
-  // Calcul du transform en ligne (plus fiable que la manipulation directe du DOM)
+  
   const transformStyle = {
     transform: `translateX(-${pos * CARD_W}px)`,
   }
 
   return (
     <div
-      className="relative w-full overflow-hidden" // Ajout de overflow-hidden ici
+      className="relative w-full overflow-hidden" 
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -136,7 +136,7 @@ const Carousel = ({ items }: { items: Exposition[] }) => {
         >
           {items.map((expo) => (
             <div key={expo.id} style={{ minWidth: `${CARD_W}px` }}>
-               <CarouselCard {...expo} onClick={() => navigate(`/expositions/${expo.id}`)} />
+               <CarouselCard {...expo} onClick={() => navigate(`/oeuvres/${expo.id}`)} />
             </div>
           ))}
         </div>
