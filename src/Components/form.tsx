@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../Components/button';
 
 
@@ -10,14 +11,17 @@ const Title = ({ children }: { children: React.ReactNode }) => (
   </h1>
 )
 
+
+
 export const Register = () =>
     {
+      const navigate = useNavigate()
         return(
             <div className="min-h-screen w-full flex items-center justify-center bg-white-50">
       
             {/* Conteneur Glassmorphic */}
           <div className="relative group">
-            {/* Effet de lueur en arrière-plan (Optionnel) */}
+            {/* Effet de lueur en arrière-plan */}
             <div className="absolute -inset-0.5 bg-white-60 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             
             <div className="relative card w-96 bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl p-8">
@@ -81,7 +85,7 @@ export const Register = () =>
               </form>
 
               <div className="mt-6 text-center">
-                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
+                <a onClick={() =>{navigate(``)}} className="text-sm text-white/60 hover:text-white transition-colors">
                   I already have an account?
                 </a>
               </div>
@@ -96,11 +100,12 @@ export const Register = () =>
 
 export const Connexion = () =>
     {
+        const navigate = useNavigate()
         return (
             <div className="min-h-screen w-full flex items-center justify-center bg-white-50">
       
           <div className="relative group">
-            {/* Effet de lueur en arrière-plan (Optionnel) */}
+            {/* Effet de lueur en arrière-plan*/}
             <div className="absolute -inset-0.5 bg-white-60 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             
             <div className="relative card w-96 bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl p-8">
@@ -148,10 +153,10 @@ export const Connexion = () =>
               </form>
 
               <div className="mt-6 text-center between-y-4 flex flex-col items-center">
-                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
+                <a onClick={() =>{navigate(``)}} className="text-sm text-white/60 hover:text-white transition-colors">
                   Mot de passe oublié ?
                 </a>
-                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">
+                <a onClick={() =>{navigate(``)}} className="text-sm text-white/60 hover:text-white transition-colors">
                   I don't have an account ?
                 </a>
               </div>
