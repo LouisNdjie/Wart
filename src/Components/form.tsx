@@ -25,7 +25,7 @@ export const Register = () =>
             <div className="absolute -inset-0.5 bg-white-60 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             
             <div className="relative card w-96 bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl p-8">
-              <Title>Register</Title>
+              <Title>REGISTER</Title>
             
               <form className="space-y-6">
                 {/* Champ Utilisateur */}
@@ -109,7 +109,7 @@ export const Connexion = () =>
             <div className="absolute -inset-0.5 bg-white-60 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
             
             <div className="relative card w-96 bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl p-8">
-              <Title>Login</Title>
+              <Title>LOGIN</Title>
             
               <form className="space-y-6">
                 {/* Champ Utilisateur */}
