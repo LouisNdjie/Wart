@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 /**Layouts */
 import MainLayout from "./layouts/MainLayout";
+import AdminLayout from "./layouts/AdminLayout";
 //import AdminLayout from "./layouts/AdminLayout";
 
 /**Pages */
