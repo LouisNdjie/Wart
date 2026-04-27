@@ -10,6 +10,7 @@ import Artistes from "./Pages/Artistes";
 import Oeuvres from "./Pages/Oeuvres";
 import Edito from "./Pages/Edito";
 import Galerie from "./Pages/Galerie";
+import LoginPage from "./Pages/Loginpage";
 
 
 
@@ -25,7 +26,9 @@ function App() {
           <Route path="oeuvres" element={<Oeuvres />} />
           <Route path="edito" element={<Edito />} />
           <Route path="galerie" element={<Galerie />} />
+          <Route path="loginpage" element={<LoginPage/>} />
         </Route>
+
 
       </Routes>
     </BrowserRouter>

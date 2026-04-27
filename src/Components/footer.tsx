@@ -35,16 +35,16 @@ const Footer = () => {
           <h3 className="font-bold uppercase text-gray-900 tracking-wider">Suivez-nous</h3>
           <p className="text-sm text-gray-500">Rejoignez notre communauté sur vos réseaux préférés.</p>
           <div className="flex gap-5 mt-2 text-gray-400">
-            <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube" className="hover:text-[#FF0000] transition-colors">
+            <a href="https://youtube.com" target="_blank"  className="hover:text-[#FF0000] transition-colors">
               <SocialIcon path={icons.youtube} />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-[#0077B5] transition-colors">
+            <a href="https://linkedin.com" target="_blank" className="hover:text-[#0077B5] transition-colors">
               <SocialIcon path={icons.linkedin} />
             </a>
-            <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-black transition-colors">
+            <a href="https://github.com" target="_blank"  className="hover:text-black transition-colors">
               <SocialIcon path={icons.github} />
             </a>
-            <a href="https://discord.com" target="_blank" rel="noreferrer" aria-label="Discord" className="hover:text-[#5865F2] transition-colors">
+            <a href="https://discord.com" target="_blank"  className="hover:text-[#5865F2] transition-colors">
               <SocialIcon path={icons.discord} />
             </a>
           </div>

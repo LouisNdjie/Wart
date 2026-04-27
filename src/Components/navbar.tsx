@@ -141,7 +141,7 @@ const Navbar = ({ userInitial = 'SE' }: NavbarProps) => { //On va construire en 
             <MenuItem>
                {({ focus }) => (
                 <button 
-                  onClick={() => navigate(`/register`)}
+                  onClick={() => navigate(`/LoginPage`)}
                   className={`flex items-center gap-3 w-full px-4 py-2 text-sm text-blue-500 ${focus ? 'bg-blue-50' : ''}`}>
                   <ArrowLeftOnRectangleIcon className="h-4 w-4" />
                   Se connecter

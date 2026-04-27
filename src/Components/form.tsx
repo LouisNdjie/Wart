@@ -19,7 +19,7 @@ export const Register = () =>
         return(
             <div className="min-h-screen w-full flex items-center justify-center bg-white-50">
       
-            {/* Conteneur Glassmorphic */}
+            {/* Conteneur Glassmorphiqure */}
           <div className="relative group">
             {/* Effet de lueur en arrière-plan */}
             <div className="absolute -inset-0.5 bg-white-60 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
@@ -101,6 +101,7 @@ export const Register = () =>
 export const Connexion = () =>
     {
         const navigate = useNavigate()
+        
         return (
             <div className="min-h-screen w-full flex items-center justify-center bg-white-50">
       
@@ -146,9 +147,9 @@ export const Connexion = () =>
                   </div>
                 </div>
 
-                {/* Bouton Daisy UI customisé */}
+                {/* Boutoncustomisé */}
                 <div className="form-control mt-6 flex items-center justify-center">
-                        <Button label="Se connecter" onClick={() => console.log('cliqué')} />
+                        <Button label="Se connecter" onClick={() => navigate(`/home`)} />
                 </div>
               </form>
 

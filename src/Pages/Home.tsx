@@ -20,40 +20,6 @@ interface Exposition {
 
 const enCours: Exposition[] = [
   {
-    id: 1,
-    title: 'Formes Vivantes',
-    description: 'Lorem ipsum dolor\nsit amet, consectetur\nadipiscing elit.',
-    dates: '13 jan – 3 mar 2026',
-    tag: 'Peinture',
-    imageUrl: '/images/formes-vivantes.jpg',
-    artistName: 'Sandra Vasquez',
-    artistHandle: '@s.vasquez',
-    views: 10, comments: 4, likes: 18,
-  },
-  {
-    id: 2,
-    title: 'Éclats de lumière',
-    description: 'Nam elementum massa\nac purus volutpat iaculis.',
-    dates: '23 jan – 15 avr 2026',
-    tag: 'Sculpture',
-    imageUrl: '',
-    artistName: 'The Weeknd',
-    artistHandle: '@The_weeknd',
-    views: 10, comments: 10, likes: 10,
-  },
-  {
-    id: 3, title: 'Corps & Territoire', description: 'Sed ut perspiciatis\nunde omnis iste natus.',
-    dates: '1 fév – 30 avr 2026', tag: 'Photographie', imageUrl: '',
-    artistName: 'Yayoi TAZONG', artistHandle: '@y.tazong',
-    views: 24, comments: 6, likes: 31,
-  },
-  {
-    id: 4, title: 'Mémoire collective', description: 'At vero eos et accusamus\net iusto odio dignissimos.',
-    dates: '5 fév – 10 mai 2026', tag: 'Installation', imageUrl: '',
-    artistName: 'Kara Walker', artistHandle: '@k.walker',
-    views: 15, comments: 3, likes: 22,
-  },
-  {
     id: 5, title: 'Résonances', description: 'Quis autem vel eum\niure reprehenderit.',
     dates: '15 fév – 20 mai 2026', tag: 'Art sonore', imageUrl: '',
     artistName: 'Shane', artistHandle: '@shane',
@@ -62,11 +28,6 @@ const enCours: Exposition[] = [
 ]
 
 const archives = [
-  { id: 6, title: 'Terres Brûlées', dates: '2024', imageUrl: '#ede8dc' },
-  { id: 7, title: 'Lignes de fuite', dates: '2024', imageUrl: '#e0e8f0' },
-  { id: 8, title: 'Strates', dates: '2023', imageUrl: '#eee8f2' },
-  { id: 9, title: 'Orgasmes', dates: '2023', imageUrl: '#e2f0e8' },
-  { id: 10, title: 'Fellation', dates: '2022', imageUrl: '#f2ece0' },
   { id: 11, title: 'luxure', dates: '2022', imageUrl: '#e8f0f5' },
 ]
 
@@ -148,8 +109,8 @@ const Carousel = ({ items }: { items: Exposition[] }) => {
         aria-label="Précédent"
         className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10
           w-8 h-8 rounded-full bg-white border border-gray-200
-          flex items-center justify-center
-          disabled:opacity-30 hover:bg-gray-50 transition"
+          disabled:opacity-30 hover:bg-gray-50 transition
+          flex items-center justify-center"
       >
         <ChevronLeft />
       </button>
