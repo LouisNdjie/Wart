@@ -1,17 +1,15 @@
+import './AdminLayout.css';
+import Header from '../Components/header';
+import Sidebar from '../Components/sidebar';
+import Admin from '../Components/admin';
+
 const AdminLayout = () => {
     return (
-        <>
-            <div>
-                //utilisateurs connectés
-            </div>
-            <div>
-                //artistes Connectés
-            </div>
-            <div>
-                //requêtes en cours 
-            </div>
-        </>
-        
+        <div className="grid-container">
+            <Header />
+            <Sidebar />
+            <Admin />
+        </div> 
     )
 
 };
