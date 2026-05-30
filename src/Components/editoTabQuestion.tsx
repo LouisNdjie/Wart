@@ -1,4 +1,3 @@
-// components/TabQuestions.tsx
 import React, { useState, useEffect } from 'react'
 import * as Icons from '@heroicons/react/24/outline'
 import { getQuestions, postQuestion } from '../api/client'

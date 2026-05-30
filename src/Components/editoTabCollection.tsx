@@ -1,4 +1,3 @@
-// components/TabCollection.tsx
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getMyCollection } from '../api/client'
@@ -40,7 +39,7 @@ export default function TabCollection() {
         Ma collection personnel
       </h2>
 
-      {/* Tableau de bord / Synthèse de la collection */}
+      {/* Tableau de bord et présentation de la collection */}
       <div className="grid grid-cols-3 gap-4">
         {[
           { label: 'Œuvres acquises', val: acquises.length },

@@ -1,4 +1,4 @@
-// components/CarouselCard.tsx
+
 const Icon = ({ name }: { name: 'eye' | 'msg' | 'heart' }) => {
   const paths = {
     eye: 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',

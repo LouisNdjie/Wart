@@ -1,4 +1,3 @@
-// types/index.ts
 
 // Enums et Types de configuration globale
 export type UserRole = 'artiste' | 'collectionneur' | 'admin'
@@ -90,7 +89,7 @@ export type Article = {
 }
 
 /* ==========================================
-   SYSTÈME & SUIVI (ADMIN / ESPACES CO)
+   SYSTÈME & SUIVI 
    ========================================== */
 
 export type Notification = {
@@ -124,7 +123,6 @@ export type OeuvreCollection = {
   date: string
 }
 
-// Stats Dashboard d'administration (Raccordé au linter strict)
 export type DashboardStats = {
   oeuvres_count: number
   artistes_count: number

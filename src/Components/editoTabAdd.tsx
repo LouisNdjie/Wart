@@ -1,4 +1,3 @@
-// components/TabAjouter.tsx
 import React, { useState, useRef, useCallback } from 'react'
 import * as Icons from '@heroicons/react/24/outline'
 import { createOeuvre } from '../api/client'
@@ -61,7 +60,7 @@ export default function TabAjouter() {
 
       await createOeuvre(formData)
       
-      // Petit feedback visuel humain temporaire
+      // Petit feedback visuel par le gonzomor
       setSubmitted(true)
       setTimeout(() => setSubmitted(false), 3000)
       
@@ -219,7 +218,7 @@ export default function TabAjouter() {
           {/* Bouton de validation unifié avec gestion des états d'UI requis */}
           <div className="flex flex-col gap-2 mt-2">
             <Button
-              label={loading ? "Publication..." : submitted ? "✓ Œuvre ajoutée avec succès" : "Publier l'œuvre"}
+              label={loading ? "Publication..." : submitted ? "Oeuvre ajoutée avec succès" : "Publier l'œuvre"}
               size="lg"
               className={`w-full text-white transition cursor-pointer ${
                 submitted ? 'bg-green-600 hover:bg-green-700' : 'bg-[#E2725B] hover:bg-[#c85e48]'

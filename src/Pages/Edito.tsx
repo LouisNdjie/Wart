@@ -1,4 +1,3 @@
-// Pages/Edito.tsx
 import { useState } from 'react'
 import useAuth from '../hooks/useAuth'
 import TabNews from '../Components/editoTabNews'
@@ -36,7 +35,7 @@ export default function Edito() {
   return (
     <div className="px-6 sm:px-10 pt-12 pb-20 max-w-3xl mx-auto font-sans flex flex-col gap-6">
       
-      {/* EN-TÊTE DE L'ESPACE PERSONNEL */}
+      {/* Espace personnel */}
       <div>
         <span className="text-[10px] tracking-widest text-[#E2725B] uppercase font-bold block mb-1">
           Espace personnel
@@ -56,7 +55,7 @@ export default function Edito() {
         </div>
       </div>
 
-      {/* BARRE DE NAVIGATION PAR ONGLETS */}
+      {/* Barre de navigation */}
       <div className="flex gap-2 flex-wrap border-b border-gray-100 pb-3 mt-2">
         {visibleTabs.map((tab) => {
           const isActive = activeTab === tab.id
@@ -76,7 +75,7 @@ export default function Edito() {
         })}
       </div>
 
-      {/* ZONE DE RENDU DES COMPOSANTS FLUIDES */}
+      {/* Onglets */}
       <div className="w-full mt-2 animate-fade-in">
         {activeTab === 'news'          && <TabNews />}
         {activeTab === 'notifications' && <TabNotifications />}

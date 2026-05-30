@@ -1,4 +1,3 @@
-// components/Button.tsx
 
 type BtnProps = {
   label?: string

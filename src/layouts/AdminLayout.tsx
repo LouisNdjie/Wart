@@ -14,7 +14,7 @@ type AdminLink = {
   btn?: { text: string; url: string }
 }
 
-// On applique le type sur notre tableau de configuration
+
 const SECTIONS: { name: string; links: AdminLink[] }[] = [
   {
     name: 'Principal',

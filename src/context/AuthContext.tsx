@@ -32,7 +32,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null)
   }
 
-  // Extraction rapide des initiales, plus lisible et directe
+  // Extraction des initiale 
   const initials = user?.username
     ? user.username.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
     : 'SE'

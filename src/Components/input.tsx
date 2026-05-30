@@ -1,10 +1,8 @@
-// components/InputField.tsx
 import React from 'react'
 
-// On hérite des attributs HTML standard de l'input pour ne pas réinventer la roue
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string
-  icon?: React.ReactNode // Rendu optionnel pour plus de flexibilité
+  icon?: React.ReactNode 
 }
 
 export default function InputField({
@@ -12,8 +10,8 @@ export default function InputField({
   type = 'text',
   placeholder,
   icon,
-  className = '', // 
-  ...rest 
+  className = '', 
+  ...rest // pour avoir accès aux autres propriétés
 }: InputProps) {
   return (
     <div className={`flex flex-col gap-1.5 w-full ${className}`}>

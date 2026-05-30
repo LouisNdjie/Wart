@@ -1,4 +1,4 @@
-// components/TabNews.tsx
+// components/editoTabNews.tsx
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getArticles } from '../api/client'

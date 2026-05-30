@@ -1,4 +1,3 @@
-// pages/Galerie.tsx
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as THREE from 'three'
@@ -72,7 +71,6 @@ const MOVE_SPEED = 0.08
 const PLAYER_HEIGHT = 1.7
 const BOUNDS = { minX: 0.5, maxX: 14.5, minZ: -16, maxZ: 5.8 }
 
-// GALERIE PROCÉDURALE définie EN DEHORS du composant pour éviter le hoisting au cas où le composant ne se charge pas 
 const buildProceduralGallery = (scene: THREE.Scene) => {
   const W = 15, L = 20, H = 4.5
   const wallMat  = new THREE.MeshStandardMaterial({ color: 0xf8f5f0, roughness: 0.9 })
@@ -183,7 +181,7 @@ const addArtworks = (scene: THREE.Scene, artworkMeshes: THREE.Mesh[]) => {
   })
 }
 
-// ── COMPOSANT ──
+
 const Galerie = () => {
   const navigate = useNavigate()
   const mountRef        = useRef<HTMLDivElement>(null)
@@ -204,17 +202,17 @@ const Galerie = () => {
     const mount = mountRef.current
     if (!mount) return
 
-    // ── SCÈNE ──
+    // Scène
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(0xf5f2ee)
     scene.fog = new THREE.Fog(0xf5f2ee, 15, 35)
 
-    // ── CAMÉRA ──
+    // Caméra
     const camera = new THREE.PerspectiveCamera(75, mount.clientWidth / mount.clientHeight, 0.1, 100)
     camera.position.set(7, PLAYER_HEIGHT, -1)
     cameraRef.current = camera
 
-    // ── RENDERER ──
+    // Rendu
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(mount.clientWidth, mount.clientHeight)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -226,7 +224,7 @@ const Galerie = () => {
     mount.appendChild(renderer.domElement)
     rendererRef.current = renderer
 
-    // ── LUMIÈRES ──
+    // Gestion de la luminosité
     scene.add(new THREE.AmbientLight(0xffffff, 0.6))
     ;[[4,4,-12],[4,4,-6],[4,4,0],[10,4,-12],[10,4,-6],[10,4,0]].forEach(([x,y,z]) => {
       const spot = new THREE.SpotLight(0xfff5e0, 1.5, 12, Math.PI / 5, 0.4, 1.5)
@@ -236,10 +234,10 @@ const Galerie = () => {
       scene.add(spot, spot.target)
     })
 
-    // ── ŒUVRES ──
+    // Oeuvres
     addArtworks(scene, artworkMeshesRef.current)
 
-    // ── GLTF ──
+    // GLTF
     new GLTFLoader().load(
       '/models/scene.gltf',
       (gltf) => {
@@ -257,7 +255,6 @@ const Galerie = () => {
           setLoadProgress(Math.round((progress.loaded / progress.total) * 100))
       },
       () => {
-        // Fallback procédural — buildProceduralGallery est déclarée avant le composant
         buildProceduralGallery(scene)
         setLoading(false)
       }
@@ -271,7 +268,7 @@ const Galerie = () => {
     controls.addEventListener('lock',   () => setLocked(true))
     controls.addEventListener('unlock', () => setLocked(false))
 
-    // ── CLAVIER ──
+    
     const onKeyDown = (e: KeyboardEvent) => { keysRef.current[e.code] = true }
     const onKeyUp   = (e: KeyboardEvent) => { keysRef.current[e.code] = false }
     document.addEventListener('keydown', onKeyDown)

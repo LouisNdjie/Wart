@@ -1,10 +1,8 @@
-// pages/admin/Dashboard.tsx
 import { useEffect, useState } from 'react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, Cell, PieChart, Pie } from 'recharts'
 import { getStats } from '../../api/client'
 import type { DashboardStats } from '../../types'
 
-// Les données de tendance restent en dur pour la maquette visuelle du graphique
 const VISITS_MOCK = [
   { mois: 'Jan', visites: 820 },
   { mois: 'Fév', visites: 1140 },
@@ -22,7 +20,6 @@ const CATEGORIES_MOCK = [
 ]
 
 export default function Dashboard() {
-  // SOLUTION : On remplace <any> par notre nouveau type ou null
   const [stats, setStats] = useState<DashboardStats | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -33,7 +30,6 @@ export default function Dashboard() {
       .finally(() => setLoading(false))
   }, [])
 
-  // Fallbacks si l'API n'a pas encore répondu
   const metrics = [
     { label: 'Œuvres totales', value: stats?.oeuvres_count || 284, delta: '+12 ce mois', color: 'text-green-700 bg-green-50' },
     { label: 'Artistes', value: stats?.artistes_count || 42, delta: '+3 nouveaux', color: 'text-green-700 bg-green-50' },
@@ -135,7 +131,7 @@ export default function Dashboard() {
             <thead>
               <tr className="text-[10px] text-gray-400 uppercase tracking-wider border-b border-gray-100">
                 <th className="pb-2.5 font-semibold">Collectionneur</th>
-                <th className="pb-2.5 font-semibold">Œuvre</th>
+                <th className="pb-2.5 font-semibold">Oeuvre</th>
                 <th className="pb-2.5 font-semibold">Prix</th>
                 <th className="pb-2.5 font-semibold">Date</th>
                 <th className="pb-2.5 font-semibold text-right">Statut</th>

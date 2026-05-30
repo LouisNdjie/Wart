@@ -1,4 +1,3 @@
-// pages/admin/Moderation.tsx
 import { useState, useEffect } from 'react'
 import * as Icons from '@heroicons/react/24/outline'
 import { 
@@ -31,11 +30,10 @@ export default function Moderation() {
   const [bannedCount, setBannedCount] = useState(2) // Compteur simulé pour la démo
   const [loading, setLoading] = useState(true)
 
-  // Chargement asynchrone synchrone avec l'API réelle
+  // Chargement asynchrone synchrone
   useEffect(() => {
     Promise.all([getCommentairesSignales(), getQuestions()])
       .then(([commentsRes, questionsRes]) => {
-        // Fallbacks si la DB est vide pendant le dev
         setComments((commentsRes as ReportedComment[]) || [
           { id: 1, auteur: 'user_42', userId: 'usr-1', oeuvre: 'Pancha-mama', date: 'Il y a 2h', message: 'Commentaire inapproprié signalé par 3 utilisateurs...', signalements: 3 },
           { id: 2, auteur: 'kart_collector', userId: 'usr-2', oeuvre: 'Éclats de lumière', date: 'Il y a 5h', message: 'Lien externe suspect détecté dans le commentaire...', signalements: 1 },
@@ -50,7 +48,6 @@ export default function Moderation() {
   }, [])
 
   const handleIgnoreComment = (id: number) => {
-    // Juste un filtre visuel local pour vider la file d'attente
     setComments(prev => prev.filter(c => c.id !== id))
   }
 
@@ -84,7 +81,7 @@ export default function Moderation() {
   return (
     <div className="p-6 flex flex-col gap-6 max-w-3xl font-sans">
       
-      {/* Grille de synthèse rapide */}
+      {/* Grille de synthèse*/}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           { label: 'Commentaires signalés', val: comments.length, bg: 'bg-red-50 text-red-700' },
@@ -101,7 +98,7 @@ export default function Moderation() {
         ))}
       </div>
 
-      {/* Section Commentaires */}
+      {/*Commentaires */}
       <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-xs">
         <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-4">Signalements récents</h3>
         
@@ -157,7 +154,7 @@ export default function Moderation() {
         )}
       </div>
 
-      {/* Section Questions Édito */}
+      {/* Questions Édito */}
       <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-xs">
         <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-4">Questions de la communauté</h3>
         

@@ -1,4 +1,3 @@
-// components/ModalAchat.tsx
 import { useState } from 'react'
 import Button from './button'
 import InputField from './input'
@@ -67,7 +66,6 @@ export default function ModalAchat({
           </span>
         </div>
 
-        {/* Inputs avec notre nouvelle structure InputField adaptative */}
         <div className="flex flex-col gap-3">
           <InputField
             label="Votre nom complet"
@@ -75,7 +73,7 @@ export default function ModalAchat({
             required
             value={form.nom}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setForm({ ...form, nom: e.target.value })}
-            // Le style s'adapte si le thème de l'input était sombre, on surcharge les classes de texte
+            // Fuck
             className="text-gray-900" 
           />
           
@@ -103,11 +101,10 @@ export default function ModalAchat({
           </div>
         </div>
 
-        {/* Bouton adapté à la variante sémantique de taille "lg" */}
         <Button 
           label={loading ? "Envoi en cours..." : "Passer la commande"} 
           size="lg"
-          className="w-full mt-1 text-white bg-[#E2725B] hover:bg-[#c85e48]" // Surcharge de la couleur pour la commande
+          className="w-full mt-1 text-white" // suircharge du bouton
         />
 
         <p className="text-[10px] text-gray-400 text-center leading-relaxed">

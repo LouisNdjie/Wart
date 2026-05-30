@@ -41,14 +41,14 @@ function App() {
             <Route path="profile" element={<Profile />} />
           </Route>
 
-          {/* Login admin — hors layout admin pour ne pas avoir la sidebar */}
+          {/* Login admin hors layout admin pour ne pas avoir la sidebar */}
           <Route path="/admin/login" element={<AdminLogin />} />
 
           {/* Interface admin */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="moderation" element={<Moderation />} />
-            {/* Ces routes seront décommentées au fur et à mesure */}
+            {/* Perr je vais ajouter ça after*/}
             {/* <Route path="oeuvres" element={<AdminOeuvres />} /> */}
             {/* <Route path="artistes" element={<AdminArtistes />} /> */}
             {/* <Route path="collectionneurs" element={<AdminCollectionneurs />} /> */}

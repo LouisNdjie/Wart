@@ -1,4 +1,3 @@
-// Pages/Artistes.tsx
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ArtistCard from '../Components/artistCard'
@@ -81,7 +80,7 @@ export default function Artistes() {
 
       <div className="min-h-screen bg-white/70 backdrop-blur-xs pt-28 pb-20">
         
-        {/* Navigation latérale épurée (Moins de gadgets visuels superflus) */}
+        {/* Navigation latérale épurée */}
         <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-2">
           {artists.map((artist, idx) => (
             <button

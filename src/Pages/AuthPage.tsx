@@ -1,4 +1,3 @@
-// Pages/AuthPage.tsx
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as Icons from '@heroicons/react/24/outline'
@@ -169,7 +168,6 @@ export default function AuthPage() {
             </div>
           )}
 
-          {/* Bouton global unifié et connecté à nos variantes sémantiques */}
           <Button
             label={loading ? "Traitement..." : mode === 'login' ? "Se connecter" : "Créer mon compte"}
             size="lg"

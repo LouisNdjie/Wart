@@ -1,4 +1,3 @@
-// components/TabNotifications.tsx
 import { useState, useEffect } from 'react'
 import * as Icons from '@heroicons/react/24/outline'
 import { getNotifications, markNotifRead, markAllNotifsRead } from '../api/client'

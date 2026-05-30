@@ -49,7 +49,7 @@ export default function Navbar() {
       {/* Actions (Recherche & Profil) */}
       <div className="fixed top-6 right-8 z-50 flex items-center gap-4">
         
-        {/* Barre de recherche simplifiée sans l'enfer des timers de flous */}
+        {/* searchbar*/}
         <div className="relative flex items-center">
           {searchOpen ? (
             <form 
@@ -77,7 +77,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Menu utilisateur via Headless UI */}
+        {/* Menu */}
         <Menu as="div" className="relative">
           <MenuButton className="flex items-center justify-center h-9 w-9 rounded-full bg-[#6b7a3e] text-white text-sm font-semibold hover:bg-[#5a6832] transition cursor-pointer">
             {initials || 'U'}

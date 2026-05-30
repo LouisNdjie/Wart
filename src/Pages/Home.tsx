@@ -1,4 +1,3 @@
-// pages/Home.tsx
 import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as Icons from '@heroicons/react/24/outline'
@@ -16,7 +15,7 @@ export default function Home() {
   const [expos, setExpos] = useState<Exposition[]>()
   const [loading, setLoading] = useState(true)
 
-  // Chargement des expositions réelles depuis le serveur
+  // Chargement 
     useEffect(() => {
     getExpositions('en_cours')
       .then(res => {
@@ -54,7 +53,7 @@ export default function Home() {
   return (
     <div className="text-black font-sans flex flex-col gap-12 -mt-24">
       
-      {/* SECTION HERO */}
+      {/* Héro*/}
       <section 
         className="w-full h-screen bg-cover bg-center relative flex items-end p-8"
         style={{ backgroundImage: `url(${heroBg})` }}
@@ -63,12 +62,12 @@ export default function Home() {
         <div className="relative z-10 text-white bg-black/20 backdrop-blur-xs p-4 rounded-xl border border-white/10 max-w-sm">
           <p className="italic text-base font-semibold drop-shadow">Inside Pancha-mama</p>
           <span className="block italic text-xs text-white/80 mt-0.5 drop-shadow">
-            Une œuvre de Sandra Vasquez de la Horra
+            Une oeuvre de Sandra Vasquez de la Horra
           </span>
         </div>
       </section>
 
-      {/* SECTION EN COURS (Carrousel fluide natif) */}
+      {/* Section en cours (Carrousel fluide natif) */}
       <section className="px-6 relative group">
         <h2 className="inline-block text-lg font-serif italic font-medium pb-1.5 border-b-2 border-[#E2725B] mb-6">
           En cours
@@ -87,7 +86,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Boutons de contrôle overlay (visibles au survol) */}
           <button
             onClick={() => handleScroll(-1)}
             className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/90 border border-gray-100 shadow-md hover:bg-white transition flex items-center justify-center cursor-pointer opacity-0 group-hover:opacity-100 focus:opacity-100"
@@ -104,7 +102,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION ARCHIVES */}
+      {/* Section archive */}
       <section className="px-6 pb-16">
         <h2 className="inline-block text-lg font-serif italic font-medium pb-1.5 border-b-2 border-[#E2725B] mb-6">
           Archives

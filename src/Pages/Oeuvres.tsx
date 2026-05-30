@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Button from '../Components/button'
 import  ModalAchat  from '../Components/modal'
 
-// ── TYPES ──
+
 type Statut = 'Disponible' | 'Réservée' | 'Vendue'
 
 interface Commentaire {
@@ -14,7 +14,7 @@ interface Commentaire {
   message: string
 }
 
-// ── DONNÉES SIMULÉES ──
+//tests
 const OEUVRE = {
   id: 1,
   titre: 'Inside Pancha-mama',
@@ -38,7 +38,7 @@ const COMMENTAIRES: Commentaire[] = [
   { id: 3, auteur: 'Aïcha D.', initiale: 'A', date: '3 avr. 2026', message: "Cette pièce m'a transportée. Le symbolisme andin est traité avec une immense sensibilité." },
 ]
 
-// ── STATUT BADGE ──
+// Badge
 const statutConfig: Record<Statut, { bg: string; text: string; dot: string }> = {
   Disponible: { bg: 'bg-green-50', text: 'text-green-700', dot: 'bg-green-400' },
   Réservée:   { bg: 'bg-amber-50', text: 'text-amber-700', dot: 'bg-amber-400' },
@@ -57,7 +57,7 @@ const StatutBadge = ({ statut }: { statut: Statut }) => {
 
 
 
-// ── PAGE ──
+
 const Oeuvres = () => {
   const navigate = useNavigate()
   const [liked, setLiked] = useState(false)
@@ -92,10 +92,10 @@ const Oeuvres = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
 
-        {/* ── COLONNE GAUCHE : IMAGE ── */}
+      
         <div className="flex flex-col gap-4">
 
-          {/* Vitrine */}
+       
           <div
             className="relative rounded-2xl overflow-hidden border border-gray-100 cursor-zoom-in"
             style={{ aspectRatio: '4/5' }}
@@ -105,7 +105,7 @@ const Oeuvres = () => {
               className="w-full h-full"
               style={{ background: OEUVRE.imageColor }}
             />
-            {/* Bouton plein écran */}
+           
             <button
               className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center text-gray-600 hover:bg-white transition"
               onClick={(e) => { e.stopPropagation(); setZoom(true) }}
@@ -141,7 +141,6 @@ const Oeuvres = () => {
           </div>
         </div>
 
-        {/* ── COLONNE DROITE : INFOS ── */}
         <div className="flex flex-col gap-6">
 
           {/* Titre + artiste */}
@@ -180,7 +179,6 @@ const Oeuvres = () => {
             {OEUVRE.description}
           </p>
 
-          {/* ── ZONE ACHAT ── */}
           <div className="border border-gray-100 rounded-2xl p-5 flex flex-col gap-4">
 
             <div className="flex items-center justify-between">
@@ -205,7 +203,7 @@ const Oeuvres = () => {
               
             )}
 
-            {/* Mentions rassurance */}
+          
             <div className="flex flex-col gap-2.5">
               {[
                 { icon: '✦', text: "Certificat d'authenticité inclus" },
@@ -232,7 +230,6 @@ const Oeuvres = () => {
         </div>
       </div>
 
-      {/* ── COMMENTAIRES ── */}
       <div className="mt-14">
         <h2
           className="inline-block text-xl font-normal pb-2 mb-8 border-b-2 border-[#E2725B]"
@@ -286,12 +283,10 @@ const Oeuvres = () => {
         </div>
       </div>
 
-      {/*MODALE ACHAT */}
       {modalOpen && (
         <ModalAchat oeuvreId={OEUVRE.id} prix={OEUVRE.prix} onClose={() => setModalOpen(false)} />
       )}
 
-      {/* ── ZOOM PLEIN ÉCRAN ── */}
       {zoom && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"

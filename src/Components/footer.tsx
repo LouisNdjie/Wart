@@ -1,7 +1,6 @@
-// components/Footer.tsx
 import { NavLink } from 'react-router-dom'
 
-// Configuration sémantique des colonnes : les humains détestent dupliquer du JSX pour des listes de liens
+// 
 const FOOTER_LINKS = [
   {
     title: 'Navigation',
