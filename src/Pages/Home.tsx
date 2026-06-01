@@ -1,243 +1,128 @@
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import * as Icons from '@heroicons/react/24/outline'
+import { getExpositions } from '../api/client'
+import CarouselCard from '../Components/carCard' 
+import type { Exposition } from '../types'
 import heroBg from '../assets/bg-expo.webp'
-import CarouselCard from '../Components/carCard'
 
-interface Exposition {
-  id: number
-  title: string
-  description: string
-  dates: string
-  tag: string
-  imageUrl: string
-  artistName: string
-  artistHandle: string
-  artistAvatar?: string
-  views: number
-  comments: number
-  likes: number
-}
 
-const enCours: Exposition[] = [
-  {
-    id: 1,
-    title: 'Formes Vivantes',
-    description: 'Lorem ipsum dolor\nsit amet, consectetur\nadipiscing elit.',
-    dates: '13 jan – 3 mar 2026',
-    tag: 'Peinture',
-    imageUrl: '/images/formes-vivantes.jpg',
-    artistName: 'Sandra Vasquez',
-    artistHandle: '@s.vasquez',
-    views: 10, comments: 4, likes: 18,
-  },
-  {
-    id: 2,
-    title: 'Éclats de lumière',
-    description: 'Nam elementum massa\nac purus volutpat iaculis.',
-    dates: '23 jan – 15 avr 2026',
-    tag: 'Sculpture',
-    imageUrl: '',
-    artistName: 'The Weeknd',
-    artistHandle: '@The_weeknd',
-    views: 10, comments: 10, likes: 10,
-  },
-  {
-    id: 3, title: 'Corps & Territoire', description: 'Sed ut perspiciatis\nunde omnis iste natus.',
-    dates: '1 fév – 30 avr 2026', tag: 'Photographie', imageUrl: '',
-    artistName: 'Yayoi TAZONG', artistHandle: '@y.tazong',
-    views: 24, comments: 6, likes: 31,
-  },
-  {
-    id: 4, title: 'Mémoire collective', description: 'At vero eos et accusamus\net iusto odio dignissimos.',
-    dates: '5 fév – 10 mai 2026', tag: 'Installation', imageUrl: '',
-    artistName: 'Kara Walker', artistHandle: '@k.walker',
-    views: 15, comments: 3, likes: 22,
-  },
-  {
-    id: 5, title: 'Résonances', description: 'Quis autem vel eum\niure reprehenderit.',
-    dates: '15 fév – 20 mai 2026', tag: 'Art sonore', imageUrl: '',
-    artistName: 'Shane', artistHandle: '@shane',
-    views: 8, comments: 2, likes: 14,
-  },
-]
 
-const archives = [
-  { id: 6, title: 'Terres Brûlées', dates: '2024', imageUrl: '#ede8dc' },
-  { id: 7, title: 'Lignes de fuite', dates: '2024', imageUrl: '#e0e8f0' },
-  { id: 8, title: 'Strates', dates: '2023', imageUrl: '#eee8f2' },
-  { id: 9, title: 'Orgasmes', dates: '2023', imageUrl: '#e2f0e8' },
-  { id: 10, title: 'Fellation', dates: '2022', imageUrl: '#f2ece0' },
-  { id: 11, title: 'luxure', dates: '2022', imageUrl: '#e8f0f5' },
-]
-
-//titre de section
-const SectionTitle = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="inline-block text-xl text-center font-medium pb-2 ml-4 mb-8 border-b-2 border-[#E2725B]">
-    {children}
-  </h2>
-)
-
-//carrousel
-const CARD_W = 750 // largeur  carte et margin 
-const AUTO_DELAY = 3500 // ms entre chaque slide auto
-
-const Carousel = ({ items }: { items: Exposition[] }) => {
-  const trackRef = useRef<HTMLDivElement>(null)
-  const [pos, setPos] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
+export default function Home() {
   const navigate = useNavigate()
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
-
-  // Calcul dynamique du nombre de cartes max
-  const getMax = useCallback(() => {
-    if (!trackRef.current?.parentElement) return 0
-    const visible = Math.max(1, Math.floor(trackRef.current.parentElement.offsetWidth / CARD_W))
-    return Math.max(0, items.length - visible)
-  }, [items.length])
-
-  //on met à jour l'état
-  const slideTo = (next: number) => {
-    const max = getMax()
-    setPos(Math.max(0, Math.min(next, max)))
-  }
-
-  const slide = (dir: number) => slideTo(pos + dir)
-
-  // Effet pour le défilement automatique
-  useEffect(() => {
-    if (isPaused) return
-
-    intervalRef.current = setInterval(() => {
-      setPos((current) => {
-        const max = getMax()
-        return current >= max ? 0 : current + 1
-      })
-    }, AUTO_DELAY)
-
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
-  }, [isPaused, getMax])
-
+  const scrollTrack = useRef<HTMLDivElement>(null)
   
-  const transformStyle = {
-    transform: `translateX(-${pos * CARD_W}px)`,
+  const [expos, setExpos] = useState<Exposition[]>()
+  const [loading, setLoading] = useState(true)
+
+  // Chargement 
+    useEffect(() => {
+    getExpositions('en_cours')
+      .then(res => {
+        const data = res as Exposition[]
+        setExpos(data?.length ? data : [
+          {
+            id: 5, 
+            title: 'Résonances', 
+            description: 'Une exploration immersive des mythes sonores.',
+            dates: '15 fév – 20 mai 2026', 
+            tag: 'Art sonore', 
+            imageUrl: '',
+            artistName: 'Shane', 
+            artistHandle: '@shane', 
+            views: 8, 
+            comments: 2, 
+            likes: 14,
+            statut: 'en_cours'
+          }
+        ])
+      })
+      .catch(err => console.error('Erreur expo home:', err))
+      .finally(() => setLoading(false))
+  }, [])
+
+
+  const handleScroll = (direction: number) => {
+    scrollTrack.current?.scrollBy({ left: direction * 360, behavior: 'smooth' })
+  }
+
+  if (loading) {
+    return <div className="p-8 text-xs font-mono text-gray-400">Chargement des expositions...</div>
   }
 
   return (
-    <div
-      className="relative w-full overflow-hidden" 
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      <div className="overflow-hidden px-4">
-        <div
-          ref={trackRef}
-          style={transformStyle}
-          className="flex gap-4 transition-transform duration-500 ease-in-out"
-        >
-          {items.map((expo) => (
-            <div key={expo.id} style={{ minWidth: `${CARD_W}px` }}>
-               <CarouselCard {...expo} onClick={() => navigate(`/oeuvres/${expo.id}`)} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <button
-        onClick={() => slide(-1)}
-        disabled={pos === 0}
-        aria-label="Précédent"
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10
-          w-8 h-8 rounded-full bg-white border border-gray-200
-          flex items-center justify-center
-          disabled:opacity-30 hover:bg-gray-50 transition"
-      >
-        <ChevronLeft />
-      </button>
-
-      <button
-        onClick={() => slide(1)}
-        disabled={pos >= items.length - 1}
-        aria-label="Suivant"
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10
-          w-8 h-8 rounded-full bg-white border border-gray-200
-          flex items-center justify-center
-          disabled:opacity-30 hover:bg-gray-50 transition"
-      >
-        <ChevronRight />
-      </button>
-
-      {/*indicateurs du carrousel*/}
-      <div className="flex justify-center gap-2 mt-6">
-        {Array.from({ length: items.length }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => slideTo(i)}
-            aria-label={`Aller à la position ${i + 1}`}
-            className={`rounded-full transition-all duration-300 ${
-              i === pos
-                ? 'w-5 h-2 bg-[#E2725B]'
-                : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  )
-}
-
-
-const ChevronLeft = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-    <path d="M15 18l-6-6 6-6" />
-  </svg>
-) // tcholeka
-const ChevronRight = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-    <path d="M9 18l6-6-6-6" />
-  </svg>
-)
-
-// vif du sujet
-const Home = () => {
-  return (
-    <div className="text-black">
-
-      {/*première section*/}
-      <section
-        className="w-full h-screen bg-cover bg-center relative"
+    <div className="text-black font-sans flex flex-col gap-12 -mt-24">
+      
+      {/* Héro*/}
+      <section 
+        className="w-full h-screen bg-cover bg-center relative flex items-end p-8"
         style={{ backgroundImage: `url(${heroBg})` }}
       >
-        <div className="absolute inset-0 bg-black/10" />
-        <div className="absolute bottom-8 left-8 z-10">
-          <p className="italic text-lg text-white drop-shadow">Inside Pancha-mama</p>
-          <p className="italic text-sm text-white/80 mt-1 drop-shadow">
-            une oeuvre de Sandra Vasquez de la Horra
-          </p>
+        <div className="absolute inset-0 bg-black/15 pointer-events-none" />
+        <div className="relative z-10 text-white bg-black/20 backdrop-blur-xs p-4 rounded-xl border border-white/10 max-w-sm">
+          <p className="italic text-base font-semibold drop-shadow">Inside Pancha-mama</p>
+          <span className="block italic text-xs text-white/80 mt-0.5 drop-shadow">
+            Une oeuvre de Sandra Vasquez de la Horra
+          </span>
         </div>
       </section>
 
-      {/* deuxième section — En cours */}
-      <section className="px-8 py-12">
-        <SectionTitle>En cours</SectionTitle>
-        <Carousel items={enCours} />
+      {/* Section en cours (Carrousel fluide natif) */}
+      <section className="px-6 relative group">
+        <h2 className="inline-block text-lg font-serif italic font-medium pb-1.5 border-b-2 border-[#E2725B] mb-6">
+          En cours
+        </h2>
+
+        <div className="relative w-full">
+          {/* Track horizontal défilant nativement */}
+          <div
+            ref={scrollTrack}
+            className="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 scrollbar-none"
+          >
+            {expos?.map((expo) => (
+              <div key={expo.id} className="snap-start shrink-0">
+                <CarouselCard {...expo} onClick={() => navigate(`/oeuvres/${expo.id}`)} />
+              </div>
+            ))}
+          </div>
+
+          <button
+            onClick={() => handleScroll(-1)}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/90 border border-gray-100 shadow-md hover:bg-white transition flex items-center justify-center cursor-pointer opacity-0 group-hover:opacity-100 focus:opacity-100"
+          >
+            <Icons.ChevronLeftIcon className="h-4 w-4 text-gray-600" />
+          </button>
+
+          <button
+            onClick={() => handleScroll(1)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/90 border border-gray-100 shadow-md hover:bg-white transition flex items-center justify-center cursor-pointer opacity-0 group-hover:opacity-100 focus:opacity-100"
+          >
+            <Icons.ChevronRightIcon className="h-4 w-4 text-gray-600" />
+          </button>
+        </div>
       </section>
 
-      {/* troisième section — Archive */}
-      <section className="px-8 pb-16">
-        <SectionTitle>Archive</SectionTitle>
-        <div className="grid grid-cols-4 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {archives.map((expo) => (
+      {/* Section archive */}
+      <section className="px-6 pb-16">
+        <h2 className="inline-block text-lg font-serif italic font-medium pb-1.5 border-b-2 border-[#E2725B] mb-6">
+          Archives
+        </h2>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { id: 11, title: 'Luxure', dates: '2022', color: 'bg-stone-100' },
+            { id: 12, title: 'Strates Éphémères', dates: '2023', color: 'bg-zinc-100' }
+          ].map((archive) => (
             <div
-              key={expo.id}
-              className="rounded-xl border border-gray-100 overflow-hidden cursor-pointer hover:border-gray-300 transition"
+              key={archive.id}
+              className="group rounded-xl border border-gray-100 overflow-hidden bg-white shadow-xs hover:border-gray-300 hover:shadow-md transition flex flex-col cursor-pointer"
             >
-              <div
-                className="h-28"
-                style={{ background: expo.imageUrl }}
-              />
-              <div className="p-2.5">
-                <p className="text-xs font-medium text-gray-900">{expo.title}</p>
-                <span className="text-xs text-gray-500">{expo.dates}</span>
+              <div className={`h-32 w-full transition-transform duration-300 group-hover:scale-[1.02] ${archive.color}`} />
+              <div className="p-4 flex flex-col gap-1 border-t border-gray-50 bg-white">
+                <span className="text-sm font-semibold text-gray-900 group-hover:text-[#E2725B] transition-colors">
+                  {archive.title}
+                </span>
+                <span className="text-xs text-gray-400 font-mono">{archive.dates}</span>
               </div>
             </div>
           ))}
@@ -247,5 +132,3 @@ const Home = () => {
     </div>
   )
 }
-
-export default Home;

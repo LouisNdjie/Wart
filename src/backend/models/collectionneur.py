@@ -1,11 +1,28 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
+from typing import Optional
+from datetime import datetime
 from config.databaseGestion import db
 
-#connexion à la collection collectionneur
-collectionneur_collection = db.collectionneur
+users_collection = db.users
 
-#schéma de validation pour les collectionneur
-class Collectionneur(BaseModel):
-    name:str
-    email:str
-    password:str
+# ── Schémas de validation ──────────────────────────────────────────────────────
+
+class UserCreate(BaseModel):
+    username: str
+    email: str
+    password: str
+    role: str = "collectionneur"          # "artiste" | "collectionneur" | "admin"
+    avatar: Optional[str] = None
+
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
+class UserOut(BaseModel):
+    id: str
+    username: str
+    email: str
+    role: str
+    avatar: Optional[str] = None
+    is_banned: bool = False
+    created_at: Optional[datetime] = None

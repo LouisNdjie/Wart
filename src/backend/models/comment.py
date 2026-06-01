@@ -1,11 +1,19 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
+from typing import Optional, List
+from datetime import datetime
 from config.databaseGestion import db
 
-#connexion à la collection comment
-comment_collection = db.comment
+commentaires_collection = db.commentaires
 
-#schéma de validation pour les commentaires
-class Comment(BaseModel):
-    content:str
-    oeuvre_id:str
-    collector_id:str
+class CommentaireCreate(BaseModel):
+    message: str
+    oeuvre_id: str
+    user_id: str
+
+class CommentaireOut(BaseModel):
+    id: str
+    message: str
+    oeuvre_id: str
+    user_id: str
+    signalements: int = 0
+    created_at: Optional[datetime] = None
