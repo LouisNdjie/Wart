@@ -9,7 +9,7 @@ export default function TabCollection() {
   const [collection, setCollection] = useState<OeuvreCollection[]>()
   const [loading, setLoading] = useState(true)
 
-  // Chargement des données réelles depuis le serveur
+  // Chargement
   useEffect(() => {
     getMyCollection()
       .then((res) => {

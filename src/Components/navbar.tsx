@@ -9,9 +9,10 @@ import logo from '../assets/wart.svg'
 const LINKS = [
   { name: 'Expositions', to: '/', end: true },
   { name: 'Artistes', to: '/artistes' },
+  { name: 'Galerie', to: '/galerie' },
   { name: 'Oeuvres', to: '/oeuvres' },
   { name: 'Edito', to: '/edito' },
-  { name: 'Galerie', to: '/galerie' },
+  
 ]
 
 export default function Navbar() {
@@ -33,7 +34,7 @@ export default function Navbar() {
     if (searchOpen) searchInput.current?.focus()
   }, [searchOpen])
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
+  const handleSearchSubmit = (e: React.SubmitEvent) => {
     e.preventDefault()
     // Louis c'est toi qu'on attend pour la logique de recherceh
     setSearchOpen(false)
@@ -80,7 +81,7 @@ export default function Navbar() {
         {/* Menu */}
         <Menu as="div" className="relative">
           <MenuButton className="flex items-center justify-center h-9 w-9 rounded-full bg-[#6b7a3e] text-white text-sm font-semibold hover:bg-[#5a6832] transition cursor-pointer">
-            {initials || 'U'}
+            {initials || 'SE'}
           </MenuButton>
 
           <MenuItems className="absolute right-0 mt-2 w-48 rounded-xl bg-white shadow-xl border border-gray-100 py-1 focus:outline-none">

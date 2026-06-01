@@ -79,7 +79,7 @@ export default function TabAjouter() {
   return (
     <div className="w-full max-w-3xl flex flex-col gap-6 font-sans p-1">
       <h2 className="text-lg font-serif italic font-medium pb-1.5 border-b-2 border-[#E2725B] self-start">
-        Ajouter une œuvre
+        Ajouter une oeuvre
       </h2>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">

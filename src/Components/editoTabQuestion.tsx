@@ -41,7 +41,7 @@ export default function TabQuestions() {
       setNewQ('')
     } catch (err) {
         console.error('Erreur ajout question:', err)
-      // Fallback local instantané en cours de dev pour ne pas bloquer l'UI
+      // retour visuel 
       setQuestions((prev) => [
         { id: Date.now(), question: newQ.trim(), reponses: 0, date: "À l'instant", answered: false },
         ...prev,

@@ -68,11 +68,11 @@ const ARTWORKS = [
 ]
 
 const MOVE_SPEED = 0.08
-const PLAYER_HEIGHT = 1.7
+const PLAYER_HEIGHT = 1.5
 const BOUNDS = { minX: 0.5, maxX: 14.5, minZ: -16, maxZ: 5.8 }
 
 const buildProceduralGallery = (scene: THREE.Scene) => {
-  const W = 15, L = 20, H = 4.5
+  const W = 30, L = 40, H = 9
   const wallMat  = new THREE.MeshStandardMaterial({ color: 0xf8f5f0, roughness: 0.9 })
   const floorMat = new THREE.MeshStandardMaterial({ color: 0xd4c4a8, roughness: 0.8 })
   const ceilMat  = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 1.0 })
@@ -156,7 +156,7 @@ const addArtworks = (scene: THREE.Scene, artworkMeshes: THREE.Mesh[]) => {
     scene.add(canvas)
     artworkMeshes.push(canvas)
 
-    // Label flottant (CanvasTexture → Sprite)
+    // Label flottant 
     const labelCanvas = document.createElement('canvas')
     labelCanvas.width = 512
     labelCanvas.height = 80
@@ -296,7 +296,7 @@ const Galerie = () => {
         pos.z = THREE.MathUtils.clamp(pos.z, BOUNDS.minZ, BOUNDS.maxZ)
         pos.y = PLAYER_HEIGHT
 
-        // Détection des œuvres
+        // Détection des oeuvres par le personnage
         raycasterRef.current.setFromCamera(new THREE.Vector2(0, 0), camera)
         const hits = raycasterRef.current.intersectObjects(artworkMeshesRef.current)
         if (hits.length > 0 && hits[0].distance < 4) {
@@ -311,7 +311,7 @@ const Galerie = () => {
     }
     animate()
 
-    // ── RESIZE ──
+    // Si on redimensionne la fenêtre
     const onResize = () => {
       camera.aspect = mount.clientWidth / mount.clientHeight
       camera.updateProjectionMatrix()
@@ -367,8 +367,8 @@ const Galerie = () => {
               Entrer dans la galerie
             </p>
             <p className="text-xs text-gray-400 mt-3 leading-relaxed">
-              Cliquez pour commencer · ZQSD / flèches pour vous déplacer<br />
-              Échap pour quitter · Cliquez sur une œuvre pour l'ouvrir
+              Cliquez pour commencer · Z Q S D / flèches pour vous déplacer<br />
+              Échap pour quitter · Cliquez sur une oeuvre pour l'ouvrir
             </p>
           </div>
         </div>
@@ -385,13 +385,13 @@ const Galerie = () => {
         </div>
       )}
 
-      {/* Tooltip œuvre */}
+      {/* Tooltip oeuvre */}
       {locked && tooltip && (
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 pointer-events-none">
           <div className="bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl px-5 py-3 text-center">
             <p className="text-sm text-gray-900 italic" style={{ fontFamily: 'Georgia, serif' }}>{tooltip.title}</p>
             <p className="text-xs text-gray-500 mt-0.5">{tooltip.artiste}</p>
-            <p className="text-[10px] text-[#E2725B] mt-2 tracking-wide uppercase">Cliquer pour voir l'œuvre →</p>
+            <p className="text-[10px] text-[#E2725B] mt-2 tracking-wide uppercase">Cliquer pour voir l'oeuvre </p>
           </div>
         </div>
       )}
@@ -400,7 +400,7 @@ const Galerie = () => {
       {locked && (
         <div className="absolute top-4 right-4 bg-white/70 backdrop-blur-sm rounded-xl px-3 py-2 pointer-events-none">
           <p className="text-[10px] text-gray-400 leading-relaxed">
-            ZQSD · flèches — déplacer<br />
+            Z Q S D · flèches directionelles — déplacer<br />
             Souris — regarder<br />
             Échap — quitter
           </p>

@@ -17,7 +17,7 @@ export default function Profile() {
 
   if (!user) return null
 
-  const handleSave = async (e: React.FormEvent) => {
+  const handleSave = async (e: React.SubmitEvent) => {
     e.preventDefault()
     if (!form.username || !form.email) return alert('Champs obligatoires')
     
@@ -82,7 +82,7 @@ export default function Profile() {
           <Button
             label={updating ? "Enregistrement..." : "Enregistrer"}
             size="md"
-            className="text-white bg-[#E2725B] hover:bg-[#c85e48]"
+            className="text-white "
           />
         </div>
       </form>

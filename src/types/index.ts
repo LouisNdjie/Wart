@@ -34,7 +34,7 @@ export type Oeuvre = {
   artiste: string
   artisteId: number
   artisteHandle: string
-  annee: string | number // Permet d'éviter les clashs de types si l'API renvoie du texte
+  annee: string | number // En cas de conflit de type
   dimensions: string
   medium: string
   statut: OeuvreStatut

@@ -67,7 +67,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section en cours (Carrousel fluide natif) */}
+      {/* Section en cours */}
       <section className="px-6 relative group">
         <h2 className="inline-block text-lg font-serif italic font-medium pb-1.5 border-b-2 border-[#E2725B] mb-6">
           En cours

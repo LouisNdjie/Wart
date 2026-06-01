@@ -17,7 +17,6 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  // Un seul objet d'état pour tout le formulaire : le grand classique des humains
   const [form, setForm] = useState({
     username: '',
     email: '',
@@ -25,7 +24,7 @@ export default function AuthPage() {
     role: 'collectionneur' as UserRole
   })
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault()
     setError('')
 
@@ -67,7 +66,7 @@ export default function AuthPage() {
           </p>
         </div>
 
-        {/* Switcher de mode (Bascule) */}
+        {/* Switcher de mode  */}
         <div className="flex bg-white/15 border border-white/10 rounded-xl p-1 shadow-sm backdrop-blur-xs">
           <button
             type="button"
@@ -78,6 +77,8 @@ export default function AuthPage() {
           >
             Se connecter
           </button>
+            
+
           <button
             type="button"
             onClick={() => { setMode('register'); setError('') }}
@@ -89,7 +90,7 @@ export default function AuthPage() {
           </button>
         </div>
 
-        {/* Boîtier unique de formulaire */}
+        {/* Boîtier du formulaire */}
         <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 shadow-xl flex flex-col gap-4">
           
           {error && (
@@ -98,7 +99,7 @@ export default function AuthPage() {
             </div>
           )}
 
-          {/* Sélecteur de rôle en ligne (uniquement à l'inscription) */}
+          {/* Sélecteur de rôle*/}
           {mode === 'register' && (
             <div className="flex flex-col gap-2">
               <label className="text-xs text-white/70 tracking-wide font-medium">Je rejoins en tant que</label>
@@ -171,7 +172,7 @@ export default function AuthPage() {
           <Button
             label={loading ? "Traitement..." : mode === 'login' ? "Se connecter" : "Créer mon compte"}
             size="lg"
-            className="w-full mt-2 text-white bg-[#E2725B] hover:bg-[#c85e48]"
+            className="w-full mt-2 text-white"
           />
         </form>
 
