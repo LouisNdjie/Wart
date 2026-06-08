@@ -26,7 +26,7 @@ function App() {
       <BrowserRouter>
         <Routes>
 
-          {/* Page d'auth — pas de navbar ni footer */}
+          {/* Page d'auth pas de navbar ni footer */}
           <Route path="/auth" element={<AuthPage />} />
 
           {/* Interface utilisateur */}

@@ -16,7 +16,7 @@ export default function AdminLogin() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault()
     if (!form.username || !form.password) {
       return setError('Veuillez remplir tous les champs.')
@@ -36,21 +36,21 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-linear-to-br from-[#1a1208] via-[#2d1f0e] to-[#1e1510] font-sans">
+    <div className="w-full h-2/3 flex items-center justify-center relative overflow-hidden font-sans">
       
-      <div className="absolute top-[-10%] left-[-5%] w-96 h-96 rounded-full bg-[#E2725B] opacity-15 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-80 h-80 rounded-full bg-[#6b7a3e] opacity-10 blur-3xl pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-5%] w-96 h-96 rounded-full opacity-15 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-80 h-80 rounded-full opacity-10 blur-3xl pointer-events-none" />
 
       <div className="relative z-10 flex w-full max-w-2xl mx-4 bg-white/5 border border-white/10 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl">
 
-        {/* Panneau gauche logo */}
+        {/* Panneau logo */}
         <div className="hidden sm:flex flex-col items-center justify-center w-64 shrink-0 px-8 py-10 border-r border-white/5 bg-white/2">
           <div className="flex flex-col items-center gap-4 text-center">
             <img src={logo} alt="Wart" className="h-16 w-auto brightness-110 drop-shadow-md" />
-            <div className="w-6 h-px bg-[#E2725B]/50" />
-            <span className="text-[10px] tracking-widest text-white/40 uppercase font-semibold">Administration</span>
+            <div className="w-6 h-px" />
+            <span className="text-[20px] tracking-widest text-white/40 font-semibold">Administration</span>
           </div>
-          <span className="absolute bottom-6 text-center text-[10px] text-white/20 leading-relaxed">
+          <span className="absolute bottom-6 text-center  text-white/20 leading-relaxed">
             Accès réservé<br />au personnel autorisé
           </span>
         </div>
@@ -62,7 +62,6 @@ export default function AdminLogin() {
           </div>
 
           <div>
-            <span className="text-[10px] tracking-widest text-[#E2725B] uppercase font-bold block mb-1">Espace admin</span>
             <h1 className="text-2xl font-serif text-white italic">Connexion</h1>
             <p className="text-xs text-white/40 mt-1">Entrez vos identifiants pour accéder au tableau de bord.</p>
           </div>

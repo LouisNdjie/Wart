@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+
 export default function ArtistCard({
   id,
   tag,
@@ -126,7 +127,7 @@ export default function ArtistCard({
               {tag}
             </span>
             <span className="text-[10px] text-gray-400 font-mono">
-              {count} {count > 1 ? 'œuvres' : 'œuvre'}
+              {count} {count > 1 ? 'oeuvres' : 'oeuvre'}
             </span>
           </div>
         </div>

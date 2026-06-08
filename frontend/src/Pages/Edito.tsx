@@ -18,15 +18,15 @@ export default function Edito() {
     return <div className="p-8 text-xs font-mono text-gray-400">Veuillez vous connecter pour accéder à cet espace.</div>
   }
 
-  const role = user.role // 'artiste', 'collectionneur' ou 'admin'
+  const role = user.role // artiste collectionneur
 
-  // Configuration dynamique des onglets
+  // Configuration des onglets
   const tabsConfig: { id: TabId; label: string; artisteOnly?: boolean }[] = [
     { id: 'news', label: 'Actualités' },
     { id: 'notifications', label: 'Notifications' },
     { id: 'collection', label: 'Ma collection' },
     { id: 'questions', label: 'Questions' },
-    { id: 'ajouter', label: '+ Ajouter une œuvre', artisteOnly: true },
+    { id: 'ajouter', label: '+ Ajouter une Oeuvre', artisteOnly: true },
   ]
 
   // Filtrage des onglets selon le rôle de l'utilisateur connecté
